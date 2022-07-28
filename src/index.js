@@ -1,31 +1,13 @@
-const { PubSub } = require('@google-cloud/pubsub');
+const pubsub = require('./config/PubSub');
 const uuid = require('uuid');
 
 require('dotenv').config();
 
 async function quickstart(topicNameOrId = 'user', subscriptionName = 'UserSubscription') {
-  // Instantiates a client
-  const pubsub = new PubSub({
-    credentials: {
-      type: process.env.PUBSUB_TYPE,
-      private_key: process.env.PUBSUB_PRIVATE_KEY.replace(/\\n/g, '\n'),
-      client_email: process.env.PUBSUB_CLIENT_EMAIL,
-      client_id: process.env.PUBSUB_CLIENT_ID,
-    },
-    projectId: process.env.PUBSUB_PROJECT_ID,
-  });
-
   // Subscribes to the topic
   const subscription = pubsub.subscription(subscriptionName);
 
   const topic = pubsub.topic(topicNameOrId);
-
-  // Creates a new topic
-  //   const [topic] = await pubsub.createTopic(topicNameOrId);
-  //   console.log(`Topic ${topic.name} created.`);
-
-  //   // Creates a subscription on that new topic
-  //   const [subscription] = await topic.createSubscription(subscriptionName);
 
   // Receive callbacks for new messages on the subscription
   subscription.on('message', message => {
