@@ -35,6 +35,9 @@ async function quickstart(topicNameOrId = 'user', subscriptionName = 'UserSubscr
   // Publishes a message to the topic
   topic.publishMessage({
     data: Buffer.from(JSON.stringify(message)),
+    attributes: {
+      origin: 'poc-pubsub',
+    },
   });
 }
 
