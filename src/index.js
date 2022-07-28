@@ -9,7 +9,7 @@ async function quickstart(topicNameOrId = 'user', subscriptionName = 'UserSubscr
 
   // Receive callbacks for new messages on the subscription
   subscription.on('message', message => {
-    console.log('Received message:', message.data.toString());
+    console.log('Received message:', JSON.parse(message.data));
 
     // Acknowledges the message so that it is not received again.
     message.ack();
