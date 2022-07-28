@@ -1,13 +1,11 @@
-const pubsub = require('./config/PubSub');
+const pubSubClient = require('./config/PubSub');
 const uuid = require('uuid');
-
-require('dotenv').config();
 
 async function quickstart(topicNameOrId = 'user', subscriptionName = 'UserSubscription') {
   // Subscribes to the topic
-  const subscription = pubsub.subscription(subscriptionName);
+  const subscription = pubSubClient.subscription(subscriptionName);
 
-  const topic = pubsub.topic(topicNameOrId);
+  const topic = pubSubClient.topic(topicNameOrId);
 
   // Receive callbacks for new messages on the subscription
   subscription.on('message', message => {
@@ -30,12 +28,14 @@ async function quickstart(topicNameOrId = 'user', subscriptionName = 'UserSubscr
 
   const message = {
     id: uuid.v4(),
-    name: 'John Doe',
+    name: 'Lucca Bassoli',
     created_at: new Date().toISOString(),
   };
 
   // Publishes a message to the topic
-  await topic.publish(Buffer.from(JSON.stringify(message)));
+  topic.publishMessage({
+    data: Buffer.from(JSON.stringify(message)),
+  });
 }
 
 quickstart();

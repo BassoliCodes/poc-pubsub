@@ -1,6 +1,7 @@
 const { PubSub } = require('@google-cloud/pubsub');
+require('dotenv').config();
 
-const pubsub = new PubSub({
+const pubSubClient = new PubSub({
   credentials: {
     type: process.env.PUBSUB_TYPE,
     private_key: process.env.PUBSUB_PRIVATE_KEY.replace(/\\n/g, '\n'),
@@ -10,4 +11,4 @@ const pubsub = new PubSub({
   projectId: process.env.PUBSUB_PROJECT_ID,
 });
 
-module.exports = pubsub;
+module.exports = pubSubClient;
