@@ -29,7 +29,7 @@ async function quickstart(topicNameOrId = 'user', subscriptionName = 'UserSubscr
   const message = {
     id: uuid.v4(),
     name: 'Lucca Bassoli',
-    created_at: new Date().toISOString(),
+    age: 20,
   };
 
   // Publishes a message to the topic
